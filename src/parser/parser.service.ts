@@ -3,7 +3,7 @@ import { Injectable, OnModuleInit } from '@nestjs/common';
 import { Ctx, Hears, InjectBot, Message, On, Start, Update } from 'nestjs-telegraf';
 import { Telegraf, Markup } from 'telegraf';
 
-import { Context } from 'src/telegram-bot/context.interface';
+import { Context } from 'src/bot/context.interface';
 import { UsersService } from 'src/common/users.service';
 import { ProductsService } from 'src/common/products.service';
 import { ChannelService } from 'src/common/channels.service';

@@ -5,7 +5,6 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { TelegrafModule } from 'nestjs-telegraf';
 import * as LocalSession from 'telegraf-session-local';
 
-import { TelegramBotModule } from './telegram-bot/bot.module';
 import { ParserModule } from './parser/parser.module';
 import { CommonModule } from './common/common.module';
 import { Channel, Product, User } from './common/models';
