@@ -3,7 +3,7 @@ import pm2 from'pm2'
 const appData = [
    {
       name: 'telegram-bot',
-      script: './distr/main.js',
+      script: './dist/main.js',
       node_args: '-r dotenv/config --es-module-specifier-resolution=node',
    },
    {

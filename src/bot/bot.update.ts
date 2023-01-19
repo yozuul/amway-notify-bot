@@ -30,6 +30,22 @@ export class BotUpdate {
          Markup.button.callback('🛒 Мои товары', 'list'),
       ]).resize())
    }
+   // Список товаров
+   @Hears('🛒 Мои товары')
+   async editProducts(ctx: Context) {
+      if(!await this.checkUser(ctx)) return
+      ctx.session.path = 'products'
+      const products = await this.productsService.findAll()
+      await ctx.reply(`🛒`)
+      if(products.length > 0) {
+         await ctx.reply(`Для удаления товара из мониторинга, нажмите на соотвествующую кнопку:`, {
+            reply_markup: {
+               inline_keyboard: this.productsKeyboard(products)
+            }
+         })
+      }
+      await ctx.reply(`Чтобы добавить новый товар, отправьте в чат его url`)
+   }
 
    @On('message')
    async testMessage(@Message('text') productUrl: string, @Ctx() ctx: Context) {
@@ -66,22 +82,7 @@ export class BotUpdate {
          }
       }
    }
-   // Список товаров
-   @Hears('🛒 Мои товары')
-   async editProducts(ctx: Context) {
-      this.checkUser(ctx)
-      ctx.session.path = 'products'
-      const products = await this.productsService.findAll()
-      await ctx.reply(`🛒`)
-      if(products.length > 0) {
-         await ctx.reply(`Для удаления товара из мониторинга, нажмите на соотвествующую кнопку:`, {
-            reply_markup: {
-               inline_keyboard: this.productsKeyboard(products)
-            }
-         })
-      }
-      await ctx.reply(`Чтобы добавить новый товар, отправьте в чат его url`)
-   }
+
 
    @On('callback_query')
    async deleteProduct(@Ctx() ctx: Context) {
@@ -131,5 +132,6 @@ export class BotUpdate {
          ctx.reply('⛔️ У вас нет доступа к боту')
          return false
       }
+      return user
    }
 }
