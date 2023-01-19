@@ -1,0 +1,6 @@
+export * from './user.model'
+export * from './add-user.dto'
+export * from './product.model'
+export * from './add-product.dto'
+export * from './channel.model'
+export * from './add-channel.dto'
